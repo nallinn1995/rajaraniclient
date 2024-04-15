@@ -1,0 +1,21 @@
+.logo-sz{
+  width: 15rem;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #cae9ea;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  background: linear-gradient(90deg, #76cede, #135385);
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: neon 2s ease-in-out infinite;
+}
+
+@keyframes neon {
+  0% { text-shadow: 2px 2px 4px rgba(9, 223, 238, 0.7), 2px 2px 10px rgba(59, 57, 193, 0.7); }
+  50% { text-shadow: 2px 2px 4px rgba(116, 231, 231, 0), 2px 2px 10px rgba(255, 127, 0, 0); }
+  100% { text-shadow: 2px 2px 4px rgba(255, 0, 122, 0.7), 2px 2px 10px rgba(255, 127, 0, 0.7); }
+}
