@@ -90,14 +90,15 @@
                 <div class="row mt-1">
                   <div class="col-2" *ngFor="let avatar of avatars">
                     <label (click)="storeAvatar(avatar,'create')" [for]="'id_'+avatar.id" class="avatar-label">
-                      <input type="radio" [id]="'id_'+avatar.id" formControlName="createAvatar" [value]="avatar" class="avatar-radio">
+                      <input type="radio" [id]="'id_'+avatar.id" formControlName="createAvatar" [value]="avatar"
+                        class="avatar-radio">
                       <img [id]="'id_'+avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
                     </label>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nickname">Name</label>
-                  <input type="text" class="form-control"  placeholder="Nickname" formControlName="playerName">
+                  <input type="text" class="form-control" placeholder="Nickname" formControlName="playerName">
                 </div>
                 <div class="btn-action mt-3 d-flex justify-content-end">
                   <button type="button" name="" id="" class="btn btn-primary"
@@ -121,8 +122,9 @@
                 <div class="row mt-1">
                   <div class="col-2" *ngFor="let avatar of avatars">
                     <label (click)="storeAvatar(avatar,'join')" [for]="avatar.id" class="avatar-label">
-                      <input type="radio" [value]="avatar" formControlName="joinAvatar" [id]="avatar.id" class="avatar-radio">
-                      <img   [id]="avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
+                      <input type="radio" [value]="avatar" formControlName="joinAvatar" [id]="avatar.id"
+                        class="avatar-radio">
+                      <img [id]="avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
                     </label>
                   </div>
                 </div>
@@ -145,16 +147,23 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12">
-        <!-- <div class="room-details">
-          <h5>Room Code</h5>
-          <p>{{roomCode}}</p>
-          <p>Share the above room code to your friends to join.</p>
+
+        <div class="room-details mt-3">
+          <label>Create room to get Room Id to share with your friends to join.</label>
+          <h5 class="p-2">Room Code : {{roomCode ? roomCode : 'NA'}}</h5>
           <div class="joined-players">
-            <div *ngFor="let player of connectedPlayers">
-              {{player}}
+            <h5 class="p-2">Room Joined Friends....</h5>
+            <div class="row">
+              <div class="col-lg-1 col-md-1 col-sm-1 col-12 text-center" *ngFor="let player of connectedPlayers">
+                <img class="avatar-image" [src]="player?.avatar" alt="avatar">
+                <p class="text-capitalize">
+                  {{player?.name}}
+                </p>
+              </div>
             </div>
+
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

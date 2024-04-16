@@ -57,13 +57,14 @@ export class LobbyComponent {
   createRoom(type: any) {
     // this.gameService.connect();
     if (type === "create") {
-      let obj = {
+      let obj:any = {
         playerName:this.createRoomForm.get("playerName")?.value,
         avatar:this.selectedAvatar,
-        host:'Create'
+        host:'oraganizer'
       }
       this.gameService.createRoom(obj);
       this.gameService.getRoomId().subscribe((id: any) => {
+        obj['roomId'] = id;
         this.roomCode = id;
         this.createRoomForm.get("roomId")?.setValue(id);
         this.joinRoom(obj);
@@ -71,9 +72,9 @@ export class LobbyComponent {
     }else{
       const obj = {
         playerName:this.joinRoomForm.get("playerName")?.value,
-        roomId:this.joinRoomForm.get("roomId")?.value,
+        roomId:this.joinRoomForm.get("roomId")?.value ? this.joinRoomForm.get("roomId")?.value : this.roomCode,
         avatar:this.selectedAvatar,
-        host:'Joined'
+        host:'participator'
       }
       this.joinRoom(obj);
     }
@@ -82,6 +83,7 @@ export class LobbyComponent {
   joinRoom(formObj:any) {
     this.gameService.joinRoom(formObj);
     this.gameService.getJoinedPlayers().subscribe((players: any) => {
+      console.log(players);
       this.connectedPlayers = players;
     });
   }
