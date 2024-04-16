@@ -76,15 +76,20 @@ export class LobbyComponent {
         avatar:this.selectedAvatar,
         host:'participator'
       }
+      this.roomCode = this.joinRoomForm.get("roomId")?.value
       this.joinRoom(obj);
     }
   }
 
   joinRoom(formObj:any) {
+    
+     if(this.connectedPlayers.length > 4){
+        alert('This Room is Full!')
+     }
     this.gameService.joinRoom(formObj);
     this.gameService.getJoinedPlayers().subscribe((players: any) => {
-      console.log(players);
-      this.connectedPlayers = players;
+    this.connectedPlayers = players;
+     
     });
   }
 

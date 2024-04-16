@@ -154,9 +154,10 @@
           <div class="joined-players">
             <h5 class="p-2">Room Joined Friends....</h5>
             <div class="row">
-              <div class="col-lg-1 col-md-1 col-sm-1 col-12 text-center" *ngFor="let player of connectedPlayers">
+             
+              <div class="col-lg-1 col-md-1 col-sm-1 col-12 text-center  ms-2" *ngFor="let player of connectedPlayers">
                 <img class="avatar-image" [src]="player?.avatar" alt="avatar">
-                <p class="text-capitalize">
+                <p class="text-capitalize text-center">
                   {{player?.name}}
                 </p>
               </div>
@@ -164,6 +165,7 @@
 
           </div>
         </div>
+        <button *ngIf="this.connectedPlayers.length == 4" class="btn btn-primary">Play</button>
       </div>
     </div>
   </div>
