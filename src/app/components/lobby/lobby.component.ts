@@ -82,8 +82,10 @@ export class LobbyComponent {
 
   joinRoom(formObj:any) {
     this.gameService.joinRoom(formObj);
+    this.gameService.getRoomId().subscribe((id: any) => {
+      this.roomCode = id;
+    })
     this.gameService.getJoinedPlayers().subscribe((players: any) => {
-      console.log(players);
       this.connectedPlayers = players;
     });
   }
