@@ -43,3 +43,9 @@
 .avatar-radio-create:checked + .avatar-image {
   border: 2px solid #f00;
 }
+
+.card{
+  --bs-card-bg: rgba(0, 0, 0, .25);
+  border-radius: 8px;
+  color: #ffffff;
+}

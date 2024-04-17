@@ -1,157 +1,125 @@
 <div class="lobby-area">
   <div class="container mt-1">
-    <!-- <div>
-      <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal"
-            type="button" role="tab" aria-controls="personal" aria-selected="true">
-            Create Room</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="employment-tab" data-bs-toggle="tab" data-bs-target="#employment" type="button"
-            role="tab" aria-controls="employment" aria-selected="false">
-            Join Room</button>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-12">
-              <div class="create-room">
-                <div class="text-center p-3">
-                  <p>Are you want play with friends?. Then create New Room and invite your friend to join.</p>
-                </div>
-                <form [formGroup]="createRoomForm" #createForm>
-                  <div class="form-group">
-                    <label for="nickname">Name</label>
-                    <input type="text" class="form-control" placeholder="Nickname" formControlName="playerName">
-                  </div>
-                  <div class="btn-action mt-3">
-                    <button type="button" name="" id="" class="btn btn-primary"
-                      (click)="createRoom('create')">Create</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="tab-pane fade" id="employment" role="tabpanel" aria-labelledby="employment-tab">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-12">
-              <div class="join-room">
-                <div class="text-center p-3">
-                  <p>Are you have Invite Code. Then, Join and play with your friends.</p>
-                </div>
-                <form [formGroup]="joinRoomForm">
-                  <div class="form-group">
-                    <label for="nickname">Name</label>
-                    <input id="nickname" type="text" class="form-control" placeholder="Nickname"
-                      formControlName="playerName">
-                  </div>
-                  <div class="form-group">
-                    <label for="code">Invite Code</label>
-                    <input id="code" type="text" class="form-control" placeholder="Code" formControlName="roomId">
-                  </div>
-                  <div class="btn-action mt-3">
-                    <button type="button" name="" id="" class="btn btn-primary"
-                      (click)="createRoom('join')">Join</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="room-details">
-      <h5>Room Code</h5>
-      <p>{{roomCode}}</p>
-      <p>Share the above room code to your friends to join.</p>
-      <div class="joined-players">
-        <div *ngFor="let player of connectedPlayers">
-          {{player}}
-        </div>
-      </div>
-    </div> -->
     <div class="row">
       <div class="col-lg-6 col-md-6 col-12">
-        <div class="create-room mb-2">
-          <div class="title text-center">
-            <h3>Create Room</h3>
-            <p>Are you want play with friends?. Then create New Room and invite your friend to join.</p>
-          </div>
-          <div class="form-action">
-            <label>Choose Your Avatar</label>
-
-            <div class="w-50">
-              <form [formGroup]="createRoomForm" #createForm>
-                <div class="row mt-1">
-                  <div class="col-2" *ngFor="let avatar of avatars">
-                    <label (click)="storeAvatar(avatar,'create')" [for]="'id_'+avatar.id" class="avatar-label">
-                      <input type="radio" [id]="'id_'+avatar.id" formControlName="createAvatar" [value]="avatar"
-                        class="avatar-radio">
-                      <img [id]="'id_'+avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="nickname">Name</label>
-                  <input type="text" class="form-control" placeholder="Nickname" formControlName="playerName">
-                </div>
-                <div class="btn-action mt-3 d-flex justify-content-end">
-                  <button type="button" name="" id="" class="btn btn-primary"
-                    (click)="createRoom('create')">Create</button>
-                </div>
-              </form>
+        <div class="card m-2">
+          <div class="card-header">
+            <div class="title text-center">
+              <h3>Create Room</h3>
+              <p>Are you want play with friends?. Then create New Room and invite your friend to join.</p>
             </div>
+          </div>
+          <div class="card-body">
+            <div class="create-room mb-2">
+              <div class="form-action">
+                <div class="w-100">
+                  <form [formGroup]="createRoomForm" #createForm>
+                    <div class="row">
+                      <div class="col-lg-6 col-12">
+                        <label>Choose Your Avatar</label>
+                        <div class="row mt-1">
+                          <div class="col-lg-3 col-md-2 col-sm-3 col-3" *ngFor="let avatar of avatars">
+                            <label (click)="storeAvatar(avatar,'create')" [for]="'id_'+avatar.id" class="avatar-label">
+                              <input type="radio" [id]="'id_'+avatar.id" formControlName="createAvatar" [value]="avatar"
+                                class="avatar-radio">
+                              <img [id]="'id_'+avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="nickname">Name</label>
+                          <input type="text" class="form-control" placeholder="Nickname" formControlName="playerName">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-action mt-3 d-flex justify-content-center">
+                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('create')">Create
+                        Room</button>
+                    </div>
+                  </form>
+                </div>
 
+              </div>
+            </div>
           </div>
         </div>
-        <div class="create-room">
-          <div class="title text-center">
-            <h3>Join Room</h3>
-            <p>Do you have Invite Code. Then, Join and play with your friends.</p>
-          </div>
-          <div class="form-action">
-            <label>Choose Your Avatar</label>
 
-            <div class="w-50">
-              <form [formGroup]="joinRoomForm">
-                <div class="row mt-1">
-                  <div class="col-2" *ngFor="let avatar of avatars">
-                    <label (click)="storeAvatar(avatar,'join')" [for]="avatar.id" class="avatar-label">
-                      <input type="radio" [value]="avatar" formControlName="joinAvatar" [id]="avatar.id"
-                        class="avatar-radio">
-                      <img [id]="avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="nickname">Name</label>
-                  <input id="nickname" type="text" class="form-control" placeholder="Nickname"
-                    formControlName="playerName">
-                </div>
-                <div class="form-group">
-                  <label for="code">Invite Code</label>
-                  <input id="code" type="text" class="form-control" placeholder="Code" formControlName="roomId">
-                </div>
-                <div class="btn-action mt-3 d-flex justify-content-end">
-                  <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('join')">Join</button>
-                </div>
-              </form>
+        <div class="join-room">
+          <div class="card m-2">
+            <div class="card-header">
+              <div class="title text-center">
+                <h3>Join Room</h3>
+                <p>Do you have Invite Code. Then, Join and play with your friends.</p>
+              </div>
             </div>
+            <div class="card-body">
+              <div class="form-action">
+                <div class="w-100">
+                  <form [formGroup]="joinRoomForm">
+                    <div class="row">
+                      <div class="col-lg-6 col-12">
+                        <label>Choose Your Avatar</label>
+                        <div class="row mt-1">
+                          <div class="col-lg-3 col-md-2 col-sm-3 col-3" *ngFor="let avatar of avatars">
+                            <label (click)="storeAvatar(avatar,'join')" [for]="avatar.id" class="avatar-label">
+                              <input type="radio" [value]="avatar" formControlName="joinAvatar" [id]="avatar.id"
+                                class="avatar-radio">
+                              <img [id]="avatar.id" [src]="avatar.image" [alt]="avatar.id" class="avatar-image">
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="nickname">Name</label>
+                          <input id="nickname" type="text" class="form-control" placeholder="Nickname"
+                            formControlName="playerName">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-12">
+                        <div class="form-group">
+                          <label for="code">Invite Code</label>
+                          <input id="code" type="text" class="form-control" placeholder="Code" formControlName="roomId">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-action mt-3 d-flex justify-content-center">
+                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('join')">Join
+                        Room</button>
+                    </div>
+                  </form>
+                </div>
 
+              </div>
+            </div>
           </div>
+
+
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12">
-
         <div class="room-details mt-3">
-          <label>Create room to get Room Id to share with your friends to join.</label>
-          <h5 class="p-2">Room Code : {{roomCode ? roomCode : 'NA'}}</h5>
-          <div class="joined-players">
+          <div class="room-code text-center">
+            <h2>Share this room code with friends andask them to join.</h2>
+            <p class="p-2">Room Code : {{roomCode ? roomCode : 'Not Availabe. Create room and get code here.'}}
+              <span style="cursor: pointer;" *ngIf="roomCode" (click)="copyCode(roomCode)">
+                <i class="fa fa-copy"></i>
+              </span>
+              <!-- <span style="cursor: pointer;" *ngIf="roomCode" (click)="share(roomCode)"> <i
+                  class="fa fa-whatsapp" aria-hidden="true"></i>
+              </span> -->
+            </p>
+            <share-buttons  *ngIf="roomCode" theme="circles-dark"
+              [include]="['facebook',  'sms', 'telegram', 'whatsapp']"
+              [showIcon]="true" [showText]="false"
+              [url]="'http://localhost:4200/'+roomCode"
+              description="Room code URL: ">
+            </share-buttons>
+          </div>
+
+          <div *ngIf="connectedPlayers.length > 0" class="joined-players">
             <h5 class="p-2">Room Joined Friends....</h5>
             <div class="row">
              
