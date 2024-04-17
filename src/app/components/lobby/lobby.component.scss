@@ -45,6 +45,7 @@
 }
 
 .card{
-  --bs-card-bg: #cae9ea;
-  color: #208c8c;
+  --bs-card-bg: rgba(0, 0, 0, .25);
+  border-radius: 8px;
+  color: #ffffff;
 }

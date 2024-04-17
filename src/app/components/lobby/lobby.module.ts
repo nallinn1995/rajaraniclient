@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LobbyComponent } from './lobby.component';
 import { Routes,RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
 const routes:Routes = [
   {
     path:'',
@@ -17,7 +18,8 @@ const routes:Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ]
 })
 

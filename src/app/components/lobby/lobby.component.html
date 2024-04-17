@@ -36,7 +36,7 @@
                     </div>
                     <div class="btn-action mt-3 d-flex justify-content-center">
                       <button type="button" name="" id="" class="btn btn-primary"
-                        (click)="createRoom('create')">Create</button>
+                        (click)="createRoom('create')">Create Room</button>
                     </div>
                   </form>
                 </div>
@@ -86,7 +86,7 @@
                       </div>
                     </div>
                     <div class="btn-action mt-3 d-flex justify-content-center">
-                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('join')">Join</button>
+                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('join')">Join Room</button>
                     </div>
                   </form>
                 </div>
@@ -100,8 +100,13 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <div class="room-details mt-3">
-          <label>Create room to get Room Id and share with your friends to join.</label>
-          <h5 class="p-2">Room Code : {{roomCode ? roomCode : 'NA'}}</h5>
+          <div class="room-code text-center">
+            <h2>Share this room code with friends andask them to join.</h2>
+            <p class="p-2">Room Code : {{roomCode ? roomCode  : 'Not Availabe. Create room and get code here.'}} <span>
+              <i class="fa fa-copy" (click)="copyCode(roomCode)"></i>
+            </span></p>
+          </div>
+
           <div class="joined-players">
             <h5 class="p-2">Room Joined Friends....</h5>
             <div class="row">

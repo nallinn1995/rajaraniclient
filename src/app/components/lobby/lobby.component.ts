@@ -3,6 +3,7 @@ import { GameService } from "../../services/game.service";
 import { v4 as uuidv4 } from "uuid";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { io, Socket } from "socket.io-client";
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: "app-game",
@@ -39,7 +40,7 @@ export class LobbyComponent {
     },
   ];
 
-  constructor(private gameService: GameService, private fb: FormBuilder) {}
+  constructor(private gameService: GameService, private fb: FormBuilder,private clipboardService: ClipboardService) {}
   ngOnInit() {
     this.createRoomForm = this.fb.group({
       playerName: "",
@@ -92,5 +93,9 @@ export class LobbyComponent {
 
   storeAvatar(avatar:any,type:string){
     this.selectedAvatar = avatar.image;
+  }
+
+  copyCode(copyCode:any){
+    this.clipboardService.copy(copyCode);
   }
 }
