@@ -18,7 +18,7 @@
                       <div class="col-lg-6 col-12">
                         <label>Choose Your Avatar</label>
                         <div class="row mt-1">
-                          <div class="col-lg-3 col-md-2 col-sm-3 col-6" *ngFor="let avatar of avatars">
+                          <div class="col-lg-3 col-md-2 col-sm-3 col-3" *ngFor="let avatar of avatars">
                             <label (click)="storeAvatar(avatar,'create')" [for]="'id_'+avatar.id" class="avatar-label">
                               <input type="radio" [id]="'id_'+avatar.id" formControlName="createAvatar" [value]="avatar"
                                 class="avatar-radio">
@@ -35,8 +35,8 @@
                       </div>
                     </div>
                     <div class="btn-action mt-3 d-flex justify-content-center">
-                      <button type="button" name="" id="" class="btn btn-primary"
-                        (click)="createRoom('create')">Create Room</button>
+                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('create')">Create
+                        Room</button>
                     </div>
                   </form>
                 </div>
@@ -62,7 +62,7 @@
                       <div class="col-lg-6 col-12">
                         <label>Choose Your Avatar</label>
                         <div class="row mt-1">
-                          <div class="col-lg-3 col-md-2 col-sm-3 col-6" *ngFor="let avatar of avatars">
+                          <div class="col-lg-3 col-md-2 col-sm-3 col-3" *ngFor="let avatar of avatars">
                             <label (click)="storeAvatar(avatar,'join')" [for]="avatar.id" class="avatar-label">
                               <input type="radio" [value]="avatar" formControlName="joinAvatar" [id]="avatar.id"
                                 class="avatar-radio">
@@ -86,7 +86,8 @@
                       </div>
                     </div>
                     <div class="btn-action mt-3 d-flex justify-content-center">
-                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('join')">Join Room</button>
+                      <button type="button" name="" id="" class="btn btn-primary" (click)="createRoom('join')">Join
+                        Room</button>
                     </div>
                   </form>
                 </div>
@@ -102,12 +103,23 @@
         <div class="room-details mt-3">
           <div class="room-code text-center">
             <h2>Share this room code with friends andask them to join.</h2>
-            <p class="p-2">Room Code : {{roomCode ? roomCode  : 'Not Availabe. Create room and get code here.'}} <span>
-              <i class="fa fa-copy" (click)="copyCode(roomCode)"></i>
-            </span></p>
+            <p class="p-2">Room Code : {{roomCode ? roomCode : 'Not Availabe. Create room and get code here.'}}
+              <span style="cursor: pointer;" *ngIf="roomCode" (click)="copyCode(roomCode)">
+                <i class="fa fa-copy"></i>
+              </span>
+              <!-- <span style="cursor: pointer;" *ngIf="roomCode" (click)="share(roomCode)"> <i
+                  class="fa fa-whatsapp" aria-hidden="true"></i>
+              </span> -->
+            </p>
+            <share-buttons  *ngIf="roomCode" theme="circles-dark"
+              [include]="['facebook',  'sms', 'telegram', 'whatsapp']"
+              [showIcon]="true" [showText]="false"
+              [url]="'http://localhost:4200/'+roomCode"
+              description="Room code URL: ">
+            </share-buttons>
           </div>
 
-          <div class="joined-players">
+          <div *ngIf="connectedPlayers.length > 0" class="joined-players">
             <h5 class="p-2">Room Joined Friends....</h5>
             <div class="row">
               <div class="col-lg-2 col-md-2 col-sm-2 col-12 text-center" *ngFor="let player of connectedPlayers">
