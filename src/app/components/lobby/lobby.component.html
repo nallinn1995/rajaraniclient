@@ -129,13 +129,12 @@
                     {{player?.name}}
                   </p>
                 </div>
-
-
               </div>
             </div>
 
           </div>
         </div>
+        <button *ngIf="this.connectedPlayers.length == 4" class="btn btn-primary"  (click)="playClick()"  [routerLink]="['/game/start', roomCode]">Play</button>
       </div>
     </div>
   </div>

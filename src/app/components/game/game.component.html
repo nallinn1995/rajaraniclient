@@ -1,1 +1,56 @@
-<p>game works!</p>
+<div class="lobby-area" *ngIf="players.length > 0">
+  <div class="container mt-1">
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-9">
+        <div class="create-room mb-2">
+          <div class="title text-center">
+            <h3>Welcome To Game</h3>
+            <p>Lets Start</p>
+          </div>
+          <h3>Players</h3>
+          <div class="row">
+            <div
+              class="col-lg-1 col-md-1 col-sm-1 text-center ms-2"
+              *ngFor="let player of players"
+            >
+              <img class="avatar-image" [src]="player?.avatar" alt="avatar" />
+              <p class="text-capitalize text-center">
+                {{ player?.name }}
+              </p>
+            </div>
+          </div>
+          <div>
+            <div *ngFor="let card of cards" class="scene scene--card">
+                <div class="card" [ngClass]="{ 'is-flipped': card.isFlipped }" (click)="toggleCard(card)">
+                    <div class="card__face card__face--front" style="font-size: larger;">Take One Card</div>
+                    <div class="card__face card__face--back" style="font-size: larger;">{{card.role}}</div>
+                </div>
+            </div>
+           
+        </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        
+        <div class="title text-center">
+            <h3>Score Board</h3>
+            <ul class="list-group">
+                <li *ngFor="let player of players;" class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ player.name }} : </span>
+                    <span><strong>{{ player.score }}</strong></span>
+                </li>
+            </ul>
+            
+        </div>
+        
+      </div>
+    </div>
+    <button class="btn btn-primary">Shuffle</button>
+  </div>
+</div>
+<div *ngIf="players.length == 0">
+    <div class="container">
+        <h2 style="text-align: center;color: bisque; margin: 100px;">Game Id invalid...</h2>
+
+    </div>
+</div>

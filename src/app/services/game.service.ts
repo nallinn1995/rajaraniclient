@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { io, Socket } from 'socket.io-client';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +52,49 @@ export class GameService {
     this.socket?.on('playerJoinedNotification', (message) => {
       console.log(message);
   });
+  }
+  roomFull(){
+    return new Observable((observer) => {
+        this.socket?.on('roomFull',(data) => {
+            observer.next(data);
+        })
+        })
+ 
+  }
+
+  playUpdate(obj:any){
+    console.log(obj,'sssssssssssssssss')
+    this.socket?.emit("playUpdate",obj);
+  }
+
+  roomMem(){
+    return new Observable((observer) => {
+    this.socket?.on('roomMem',(data) => {
+        observer.next(data);
+    })
+    })
+  }
+
+  getPlayersByRoomId(roomID:string){
+   
+    return new Observable<any[]>(observer => {
+        // Function to handle the list of players received from the server
+        const handlePlayersList = (playersList: any[]) => {
+            console.log("Received players list:", playersList);
+            observer.next(playersList);
+            observer.complete();
+        };
+
+        // Listen for the 'playerList' event from the server
+        this.socket?.on('playerList', handlePlayersList);
+        console.log("cccccccccccccc",roomID)
+        // Emit a request to the server to get players in the specified room
+        this.socket?.emit('getPlayers', roomID);
+
+        // Clean up the subscription when the observable is unsubscribed
+        return () => {
+            this.socket?.off('playerList', handlePlayersList);
+        };
+    });
   }
 }
