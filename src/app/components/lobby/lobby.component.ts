@@ -41,6 +41,7 @@ export class LobbyComponent {
 
   constructor(private gameService: GameService, private fb: FormBuilder) {}
   ngOnInit() {
+    this.gameService.connect();
     this.createRoomForm = this.fb.group({
       playerName: "",
       roomId: "",
@@ -53,15 +54,16 @@ export class LobbyComponent {
       joinAvatar:''
     });
   }
+  currentPlayer:any
 
   createRoom(type: any) {
-    // this.gameService.connect();
     if (type === "create") {
       let obj:any = {
         playerName:this.createRoomForm.get("playerName")?.value,
         avatar:this.selectedAvatar,
         host:'oraganizer'
       }
+      this.currentPlayer = obj;
       this.gameService.createRoom(obj);
       this.gameService.getRoomId().subscribe((id: any) => {
         obj['roomId'] = id;
@@ -76,24 +78,41 @@ export class LobbyComponent {
         avatar:this.selectedAvatar,
         host:'participator'
       }
+      this.currentPlayer = obj;
       this.roomCode = this.joinRoomForm.get("roomId")?.value
       this.joinRoom(obj);
     }
   }
 
-  joinRoom(formObj:any) {
-    
-     if(this.connectedPlayers.length > 4){
-        alert('This Room is Full!')
-     }
+  member:any;
+  userLength:boolean = false
+  async joinRoom(formObj:any) {
+    this.gameService.roomFull().subscribe((member:any)=>{
+        this.userLength = member
+    })
+    if(this.userLength){
+        alert("gameeeeeee full")
+        return
+    }
+     this.gameService.roomMem().subscribe((data:any) => {
+        console.log(data,"memmber")
+        this.member= data;
+    })
+   
     this.gameService.joinRoom(formObj);
     this.gameService.getJoinedPlayers().subscribe((players: any) => {
     this.connectedPlayers = players;
+
      
     });
   }
 
   storeAvatar(avatar:any,type:string){
     this.selectedAvatar = avatar.image;
+  }
+
+  playClick(){
+    console.log("dddddddddddddd",this.currentPlayer)
+    this.gameService.playUpdate(this.currentPlayer);
   }
 }
