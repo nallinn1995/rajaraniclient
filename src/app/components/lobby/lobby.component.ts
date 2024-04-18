@@ -102,7 +102,7 @@ export class LobbyComponent {
   member:any;
   userLength:boolean = false
   async joinRoom(formObj:any) {
-    localStorage.setItem('playerId',formObj.playerId);
+    sessionStorage.setItem('playerId',formObj.playerId);
     this.gameService.roomFull().subscribe((member:any)=>{
         this.userLength = member
     })

@@ -11,10 +11,10 @@ export class GameComponent {
   roomId: string | null = null;
   players: any = [];
   cards = [
-    { isFlipped: false, role: "raja" },
-    { isFlipped: false, role: "rani" },
-    { isFlipped: false, role: "theif" },
-    { isFlipped: false, role: "police" },
+    { isFlipped: false, role: "raja",selected:false },
+    { isFlipped: false, role: "rani",selected:false },
+    { isFlipped: false, role: "theif",selected:false },
+    { isFlipped: false, role: "police",selected:false },
   ];
   currentPlayerId!:number;
 
@@ -25,7 +25,7 @@ export class GameComponent {
 
 
   ngOnInit() {
-      this.currentPlayerId = Number(localStorage.getItem('playerId'));
+      this.currentPlayerId = Number(sessionStorage.getItem('playerId'));
 
     this.myService.connect();
     // Subscribe to the route parameters
@@ -54,13 +54,19 @@ export class GameComponent {
     );
   }
 
-
-  toggleCard(card: any): void {
+toggleCard(card: any): void {
+  card.selected = true;
     console.log(card,this.players,this.currentPlayerId);
+
     this.myService.updateCardDetails(card,this.currentPlayerId,this.roomId);
     console.log(this.myService.getUpdatedCardDetails());
     this.myService.getUpdatedCardDetails().subscribe((players:any)=>{
       console.log(players);
+      // let player = players.filter((x:any) => x.playerId === this.currentPlayerId).pop();
+      // console.log(player);
+      // if(player.selected && player.role === card.role){
+
+      // }
     })
     // card.isFlipped = !card.isFlipped; // Toggle the isFlipped property
   }
