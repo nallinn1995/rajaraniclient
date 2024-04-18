@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { io, Socket } from "socket.io-client";
 import { ClipboardService } from "ngx-clipboard";
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: "app-game",
   templateUrl: "./lobby.component.html",
@@ -69,12 +68,15 @@ export class LobbyComponent {
   currentPlayer:any
 
   createRoom(type: any) {
+    let randomId = Math.floor(100000 + Math.random() * 900000)
     if (type === "create") {
       let obj:any = {
         playerName:this.createRoomForm.get("playerName")?.value,
         avatar:this.selectedAvatar,
-        host:'oraganizer'
+        host:'oraganizer',
+        playerId:randomId
       }
+
       this.currentPlayer = obj;
       this.gameService.createRoom(obj);
       this.gameService.getRoomId().subscribe((id: any) => {
@@ -88,7 +90,8 @@ export class LobbyComponent {
         playerName:this.joinRoomForm.get("playerName")?.value,
         roomId:this.joinRoomForm.get("roomId")?.value ? this.joinRoomForm.get("roomId")?.value : this.roomCode,
         avatar:this.selectedAvatar,
-        host:'participator'
+        host:'participator',
+        playerId:randomId
       }
       this.currentPlayer = obj;
       this.roomCode = this.joinRoomForm.get("roomId")?.value
@@ -99,6 +102,7 @@ export class LobbyComponent {
   member:any;
   userLength:boolean = false
   async joinRoom(formObj:any) {
+    localStorage.setItem('playerId',formObj.playerId);
     this.gameService.roomFull().subscribe((member:any)=>{
         this.userLength = member
     })
@@ -110,7 +114,7 @@ export class LobbyComponent {
         console.log(data,"memmber")
         this.member= data;
     })
-   
+
     this.gameService.joinRoom(formObj);
     this.gameService.getRoomId().subscribe((id: any) => {
       this.roomCode = id;
@@ -118,7 +122,7 @@ export class LobbyComponent {
     this.gameService.getJoinedPlayers().subscribe((players: any) => {
     this.connectedPlayers = players;
 
-     
+
     });
   }
 

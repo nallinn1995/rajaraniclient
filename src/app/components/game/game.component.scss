@@ -3,7 +3,7 @@
     position: relative;
     cursor: pointer;
   }
-  
+
   .avatar-radio {
     position: absolute;
     top: 0;
@@ -13,7 +13,7 @@
     opacity: 0;
     cursor: pointer;
   }
-  
+
   .avatar-radio-create {
     position: absolute;
     top: 0;
@@ -23,7 +23,7 @@
     opacity: 0;
     cursor: pointer;
   }
-  
+
   .avatar-image {
     display: block;
     width: 50px;
@@ -31,15 +31,15 @@
     object-fit: cover;
     border-radius: 50%;
   }
-  
+
   .avatar-image:hover {
     opacity: 0.8;
   }
-  
+
   .avatar-radio:checked + .avatar-image {
     border: 2px solid #f00;
   }
-  
+
   .avatar-radio-create:checked + .avatar-image {
     border: 2px solid #f00;
   }
@@ -52,7 +52,7 @@
     margin: 40px 0;
     perspective: 600px;
   }
-  
+
   .card {
     position: relative;
     width: 100%;
@@ -60,13 +60,13 @@
     cursor: pointer;
     transform-style: preserve-3d;
     transform-origin: center right;
-    transition: transform 1s;
+    transition: transform 0.5s ease;
   }
-  
+
   .card.is-flipped {
     transform: translateX(-100%) rotateY(-180deg);
   }
-  
+
   .card__face {
     position: absolute;
     width: 100%;
@@ -78,14 +78,16 @@
     font-size: 40px;
     backface-visibility: hidden;
   }
-  
+
   .card__face--front {
     background: crimson;
   }
-  
+
   .card__face--back {
     background: slateblue;
     transform: rotateY(180deg);
   }
-  
-  
+
+  .hidden {
+    opacity: 0; /* Hide initially */
+  }

@@ -19,19 +19,19 @@
               </p>
             </div>
           </div>
-          <div>
+          <div id="cardContainer">
             <div *ngFor="let card of cards" class="scene scene--card">
                 <div class="card" [ngClass]="{ 'is-flipped': card.isFlipped }" (click)="toggleCard(card)">
                     <div class="card__face card__face--front" style="font-size: larger;">Take One Card</div>
                     <div class="card__face card__face--back" style="font-size: larger;">{{card.role}}</div>
                 </div>
             </div>
-           
+
         </div>
         </div>
       </div>
       <div class="col-lg-3 col-md-3">
-        
+
         <div class="title text-center">
             <h3>Score Board</h3>
             <ul class="list-group">
@@ -40,12 +40,12 @@
                     <span><strong>{{ player.score }}</strong></span>
                 </li>
             </ul>
-            
+
         </div>
-        
+
       </div>
     </div>
-    <button class="btn btn-primary">Shuffle</button>
+    <button class="btn btn-primary" (click)="shuffle()">Shuffle</button>
   </div>
 </div>
 <div *ngIf="players.length == 0">

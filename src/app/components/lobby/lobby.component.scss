@@ -36,22 +36,29 @@
   opacity: 0.8;
 }
 
-.avatar-radio:checked + .avatar-image {
+.avatar-radio:checked+.avatar-image {
   border: 2px solid #f00;
 }
 
-.avatar-radio-create:checked + .avatar-image {
+.avatar-radio-create:checked+.avatar-image {
   border: 2px solid #f00;
 }
 
-.card{
+.card {
   --bs-card-bg: rgba(0, 0, 0, .25);
   border-radius: 8px;
   color: #ffffff;
 }
 
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 10px;
+  align-items: center; /* align items vertically */
+  justify-items: center; /* align items horizontally */
+}
 
-.user-card{
+.user-card {
   background: rgba(0, 0, 0, .25);
   border-radius: 8px;
   color: #ffffff;
@@ -60,4 +67,26 @@
   justify-content: center;
   align-items: center;
   height: 100px;
+  width: 100px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* Ensures each card takes the full height of its container */
+}
+
+.card.card-section {
+  width: 100%; /* Each card takes up the full width of its container */
+  display: flex;
+  flex-direction: column;
+}
+
+.section-body {
+  flex: 1; /* Allows the card body to take up remaining space */
+}
+
+/* Optional: You can set a fixed height for the card-body to limit the height of each card */
+.section-body {
+  height: 150px; /* Adjust as needed */
 }

@@ -111,30 +111,47 @@
                   class="fa fa-whatsapp" aria-hidden="true"></i>
               </span> -->
             </p>
-            <share-buttons  *ngIf="roomCode" theme="circles-dark"
-              [include]="['facebook',  'sms', 'telegram', 'whatsapp']"
-              [showIcon]="true" [showText]="false"
-              [url]="'http://localhost:4200/'+roomCode"
-              description="Room code URL: ">
+            <share-buttons *ngIf="roomCode" theme="circles-dark"
+              [include]="['facebook',  'sms', 'telegram', 'whatsapp']" [showIcon]="true" [showText]="false"
+              [url]="'http://localhost:4200/'+roomCode" description="Room code URL: ">
             </share-buttons>
           </div>
 
           <div *ngIf="connectedPlayers.length > 0" class="joined-players">
             <h5 class="p-2">Room Joined Friends....</h5>
+            <!-- <div class="row">
+              <div class="player-grid">
+                <div class="user-card" *ngFor="let player of connectedPlayers">
+                  <div class="mt-1">
+                    <img class="avatar-image"
+                    [src]="player?.avatar" alt="avatar">
+                  <p class="text-capitalize"> {{player?.name}} </p>
+                  </div>
+
+                </div>
+              </div>
+            </div> -->
             <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3 col-12 text-center" *ngFor="let player of connectedPlayers">
-                <div class="user-card">
-                  <img class="avatar-image" [src]="player?.avatar" alt="avatar">
-                  <p class="text-capitalize">
-                    {{player?.name}}
-                  </p>
+              <div class="col-lg-3 col-12" *ngFor="let player of connectedPlayers">
+                <div class="card-container">
+                  <div class="card card-section">
+                    <div class="card-body section-body text-center">
+                      <a href="#" class="d-inline-block mb-2">
+                        <img [src]="player?.avatar" alt="avatar" class="rounded-pill" width="50px" height="50px">
+                      </a>
+                      <div>
+                        <h6 class="mb-0 mt-1 text-capitalize">{{player?.name}}</h6>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
           </div>
         </div>
-        <button *ngIf="this.connectedPlayers.length == 4" class="btn btn-primary"  (click)="playClick()"  [routerLink]="['/game/start', roomCode]">Play</button>
+        <button *ngIf="this.connectedPlayers.length == 4" class="btn btn-primary mt-2 d-flex justify-content-center align-items-center" (click)="playClick()"
+          [routerLink]="['/game/start', roomCode]">Play</button>
       </div>
     </div>
   </div>
